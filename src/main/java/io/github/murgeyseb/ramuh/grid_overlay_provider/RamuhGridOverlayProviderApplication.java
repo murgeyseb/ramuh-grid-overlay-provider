@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjectRamuhGridOverlayProviderApplication {
+public class RamuhGridOverlayProviderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjectRamuhGridOverlayProviderApplication.class, args);
+		SpringApplication.run(RamuhGridOverlayProviderApplication.class, args);
 	}
 
 }

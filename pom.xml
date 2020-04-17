@@ -12,7 +12,7 @@
 	<artifactId>ramuh-grid-overlay-provider</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Project Ramuh grid overlay provider</name>
-	<description>Application that provides a grid geographical overlay in GeoJson format</description>
+	<description>Application that provides a grid geographical overlay in GeoJson format for Project Ramuh</description>
 
 	<properties>
 		<java.version>11</java.version>
