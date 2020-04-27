@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.stream.Collectors;
 
 /**
@@ -24,7 +27,7 @@ public class GridOverlayService {
     }
 
     public FeatureCollection generateOverlayForFile(MultipartFile gridFile) throws IOException {
-        Network network = Importers.loadNetwork(gridFile.getOriginalFilename(), gridFile.getInputStream());
+        Network network = loadGridFile(gridFile);
         FeatureCollection featureCollection = new FeatureCollection();
         featureCollection.addAll(
                 network.getCountries().stream()
@@ -33,5 +36,27 @@ public class GridOverlayService {
                         .collect(Collectors.toList())
         );
         return featureCollection;
+    }
+
+    /**
+     * Load input multipart file into a network object.
+     * Save the input file into a temporary directory to allow usage of
+     * automatic datasource creation in PowSyBl.
+     *
+     * @param gridFile input grid multipart file
+     * @return imported Network object
+     */
+    private Network loadGridFile(MultipartFile gridFile) {
+        try {
+            Path tempDir = Files.createTempDirectory("grid-overlay-provider");
+            Path tempFile = Path.of(tempDir.toString(), gridFile.getOriginalFilename());
+            gridFile.transferTo(tempFile);
+            Network network = Importers.loadNetwork(tempFile);
+            Files.delete(tempFile);
+            Files.delete(tempDir);
+            return network;
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 }
