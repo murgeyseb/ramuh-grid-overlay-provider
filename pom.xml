@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<jib.maven.plugin.version>2.2.0</jib.maven.plugin.version>
 		<geojson.jackson.version>1.14</geojson.jackson.version>
 		<powsybl.version>3.2.0</powsybl.version>
 	</properties>
@@ -100,6 +101,21 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>${jib.maven.plugin.version}</version>
+				<configuration>
+					<to>
+						<image>ramuh/grid-overlay-provider</image>
+					</to>
+					<container>
+						<ports>
+							<port>8080</port>
+						</ports>
+					</container>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
