@@ -5,6 +5,7 @@ package io.github.murgeyseb.ramuh.grid_overlay_provider;
 
 import org.geojson.FeatureCollection;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +15,7 @@ import java.io.IOException;
  * @author Sebastien Murgey {@literal <sebastien@murgey.net>}
  */
 @RestController
+@RequestMapping(value = "/api/grid-overlay-provider")
 public class GridOverlayController {
     private final GridOverlayService gridOverlayService;
 
